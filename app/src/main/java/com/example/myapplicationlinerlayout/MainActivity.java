@@ -1,13 +1,16 @@
 package com.example.myapplicationlinerlayout;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+   // static private final String SAVED_INT_KEY = "saved_key";
     TextView result;
     Button seven;
     Button eight;
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         percent = findViewById(R.id.percent);
         clear = findViewById(R.id.clear);
 
+
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
                         result.append(six.getText().toString());
                         break;
                     case R.id.multiply:
-                       num1 = Double.parseDouble(result.getText().toString());
-                       result.setText("");
-                       operation = "*";
+                        num1 = Double.parseDouble(result.getText().toString());
+                        result.setText("");
+                        operation = "*";
                         break;
                     case R.id.one:
                         result.append(one.getText().toString());
@@ -100,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
                         result.append(three.getText().toString());
                         break;
                     case R.id.minus:
-                        num1=Double.parseDouble(result.getText().toString());
+                        num1 = Double.parseDouble(result.getText().toString());
                         result.setText("");
                         operation = "-";
                         break;
@@ -112,16 +116,16 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.equal:
                         num2 = Double.parseDouble(result.getText().toString());
-                        if (operation == "+"){
-                            result.setText(Double.toString(num1+num2));
-                        }else if (operation == "-"){
+                        if (operation == "+") {
+                            result.setText(Double.toString(num1 + num2));
+                        } else if (operation == "-") {
                             result.setText(Double.toString(num1 - num2));
-                        }else if (operation == "*"){
+                        } else if (operation == "*") {
                             result.setText(Double.toString(num1 * num2));
-                        }else if (operation== "/"){
+                        } else if (operation == "/") {
                             result.setText((Double.toString(num1 / num2)));
-                        }else if (operation == "%") {
-                            result.setText(Double.toString((num1 /100)*num2 ));
+                        } else if (operation == "%") {
+                            result.setText(Double.toString((num1 / 100) * num2));
                         }
 
                         break;
@@ -131,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
                         operation = "+";
                         break;
                     case R.id.percent:
-                        num1= Double.parseDouble(result.getText().toString());
+                        num1 = Double.parseDouble(result.getText().toString());
                         result.setText("");
                         operation = "%";
 
@@ -141,6 +145,7 @@ public class MainActivity extends AppCompatActivity {
                         result.setText("");
                         break;
                 }
+
             }
         };
 
@@ -165,5 +170,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+//    @Override
+//    public void onSaveInstanceState(Bundle outState) {
+//        super.onSaveInstanceState(outState);
+//        Log.d("ololo", "onSaveInstanceState");
+//        outState.putDouble(SAVED_INT_KEY, Double.parseDouble(result.getText().toString()));
+//    }
+//
+//    @Override
+//    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+//        super.onRestoreInstanceState(savedInstanceState);
+//        double savedDouble = savedInstanceState.getDouble(SAVED_INT_KEY);
+//        Log.d("ololo", savedDouble + " - onRestoreInstanceState");
+//        result.append(Double.toString(savedDouble));
+//    }
 
 }

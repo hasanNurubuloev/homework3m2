@@ -11,6 +11,7 @@
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="175dp"
+        android:freezesText="true"
         android:textSize="30sp" />
 
 
