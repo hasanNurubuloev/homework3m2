@@ -3,6 +3,7 @@ package com.example.myapplicationlinerlayout;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-   // static private final String SAVED_INT_KEY = "saved_key";
+   static  final String SAVED_INT_KEY = "saved_key";
     TextView result;
     Button seven;
     Button eight;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     Button plus;
     Button percent;
     Button clear;
+
+
 
     double num1;
     double num2;
@@ -61,10 +64,14 @@ public class MainActivity extends AppCompatActivity {
         clear = findViewById(R.id.clear);
 
 
+        final Intent intent = new Intent();
+
+
         View.OnClickListener ocl = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 result = findViewById(R.id.result);
+
                 switch (v.getId()) {
                     case R.id.seven:
                         result.append(seven.getText().toString());
@@ -118,14 +125,55 @@ public class MainActivity extends AppCompatActivity {
                         num2 = Double.parseDouble(result.getText().toString());
                         if (operation == "+") {
                             result.setText(Double.toString(num1 + num2));
+                            String res= String.valueOf(num1 + num2);
+                          if (res!=null && res!="") {
+                              intent.putExtra(SAVED_INT_KEY, res);
+                              setResult(RESULT_OK,intent);
+
+                          }else{
+                              setResult(RESULT_CANCELED);
+                          }finish();
+
                         } else if (operation == "-") {
                             result.setText(Double.toString(num1 - num2));
+                            String res= String.valueOf(num1 + num2);
+                            if (res!=null && res!="") {
+                                intent.putExtra(SAVED_INT_KEY, res);
+                                setResult(RESULT_OK,intent);
+
+                            }else{
+                                setResult(RESULT_CANCELED);
+                            }finish();
                         } else if (operation == "*") {
                             result.setText(Double.toString(num1 * num2));
+                            String res= String.valueOf(num1 + num2);
+                            if (res!=null && res!="") {
+                                intent.putExtra(SAVED_INT_KEY, res);
+                                setResult(RESULT_OK,intent);
+
+                            }else{
+                                setResult(RESULT_CANCELED);
+                            }finish();
                         } else if (operation == "/") {
                             result.setText((Double.toString(num1 / num2)));
+                            String res= String.valueOf(num1 + num2);
+                            if (res!=null && res!="") {
+                                intent.putExtra(SAVED_INT_KEY, res);
+                                setResult(RESULT_OK,intent);
+
+                            }else{
+                                setResult(RESULT_CANCELED);
+                            }finish();
                         } else if (operation == "%") {
                             result.setText(Double.toString((num1 / 100) * num2));
+                            String res= String.valueOf(num1 + num2);
+                            if (res!=null && res!="") {
+                                intent.putExtra(SAVED_INT_KEY, res);
+                                setResult(RESULT_OK,intent);
+
+                            }else{
+                                setResult(RESULT_CANCELED);
+                            }finish();
                         }
 
                         break;
@@ -168,7 +216,10 @@ public class MainActivity extends AppCompatActivity {
         percent.setOnClickListener(ocl);
         clear.setOnClickListener(ocl);
 
+
+
     }
+
 
 //    @Override
 //    public void onSaveInstanceState(Bundle outState) {
