@@ -10,9 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
-   static  final String SAVED_INT_KEY = "saved_key";
+    static final String SAVED_INT_KEY = "saved_key";
     TextView result;
+
+    FAAdapter adapter;
     Button seven;
     Button eight;
     Button nine;
@@ -33,9 +37,9 @@ public class MainActivity extends AppCompatActivity {
     Button clear;
 
 
-
     double num1;
     double num2;
+
     String operation; // это +, -, *, /
 
 
@@ -62,9 +66,6 @@ public class MainActivity extends AppCompatActivity {
         minus = findViewById(R.id.minus);
         percent = findViewById(R.id.percent);
         clear = findViewById(R.id.clear);
-
-
-        final Intent intent = new Intent();
 
 
         View.OnClickListener ocl = new View.OnClickListener() {
@@ -125,58 +126,29 @@ public class MainActivity extends AppCompatActivity {
                         num2 = Double.parseDouble(result.getText().toString());
                         if (operation == "+") {
                             result.setText(Double.toString(num1 + num2));
-                            String res= String.valueOf(num1 + num2);
-                          if (res!=null && res!="") {
-                              intent.putExtra(SAVED_INT_KEY, res);
-                              setResult(RESULT_OK,intent);
-
-                          }else{
-                              setResult(RESULT_CANCELED);
-                          }finish();
-
+                            String res = String.valueOf(num1 + num2);
                         } else if (operation == "-") {
                             result.setText(Double.toString(num1 - num2));
-                            String res= String.valueOf(num1 + num2);
-                            if (res!=null && res!="") {
-                                intent.putExtra(SAVED_INT_KEY, res);
-                                setResult(RESULT_OK,intent);
-
-                            }else{
-                                setResult(RESULT_CANCELED);
-                            }finish();
+                            String res = String.valueOf(num1 + num2);
                         } else if (operation == "*") {
                             result.setText(Double.toString(num1 * num2));
-                            String res= String.valueOf(num1 + num2);
-                            if (res!=null && res!="") {
-                                intent.putExtra(SAVED_INT_KEY, res);
-                                setResult(RESULT_OK,intent);
-
-                            }else{
-                                setResult(RESULT_CANCELED);
-                            }finish();
+                            String res = String.valueOf(num1 + num2);
                         } else if (operation == "/") {
                             result.setText((Double.toString(num1 / num2)));
-                            String res= String.valueOf(num1 + num2);
-                            if (res!=null && res!="") {
-                                intent.putExtra(SAVED_INT_KEY, res);
-                                setResult(RESULT_OK,intent);
-
-                            }else{
-                                setResult(RESULT_CANCELED);
-                            }finish();
+                            String res = String.valueOf(num1 + num2);
+                            finish();
                         } else if (operation == "%") {
                             result.setText(Double.toString((num1 / 100) * num2));
-                            String res= String.valueOf(num1 + num2);
-                            if (res!=null && res!="") {
-                                intent.putExtra(SAVED_INT_KEY, res);
-                                setResult(RESULT_OK,intent);
-
-                            }else{
-                                setResult(RESULT_CANCELED);
-                            }finish();
+                            String res = String.valueOf(num1 + num2);
                         }
 
-                        break;
+                    if (result != null) {
+                        Intent intent1 = new Intent();
+                        intent1.putExtra("key32", result.getText().toString());
+                        setResult(RESULT_OK, intent1);
+                        finish();
+                    }
+                    break;
                     case R.id.plus:
                         num1 = Double.parseDouble(result.getText().toString());
                         result.setText("");
@@ -215,9 +187,6 @@ public class MainActivity extends AppCompatActivity {
         plus.setOnClickListener(ocl);
         percent.setOnClickListener(ocl);
         clear.setOnClickListener(ocl);
-
-
-
     }
 
 

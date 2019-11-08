@@ -2,6 +2,8 @@ package com.example.myapplicationlinerlayout;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,11 +11,19 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class FirstActivity extends AppCompatActivity {
+import java.util.ArrayList;
 
+/**
+ * */
+public class FirstActivity extends AppCompatActivity {
+    FAAdapter adapter;
+    RecyclerView recyclerView;
+
+    TextView vh_textView;
     Button calculator_btn;
     Button share_btn;
-    TextView textView;
+
+
 
     static final String DATA_KEY = "data";
 
@@ -25,10 +35,19 @@ public class FirstActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first);
 
+        vh_textView = findViewById(R.id.vh_text_view);
         calculator_btn = findViewById(R.id.af_calculator_btn);
-        share_btn = findViewById(R.id.af_share_btn);
-        textView = findViewById(R.id.af_text_view);
+        recyclerView=findViewById(R.id.af_recycler_view);
+        adapter=new FAAdapter();
+        recyclerView.setAdapter(adapter);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(manager);
 
+  //      Intent intent = getIntent();
+    //    ArrayList<String> arrayList = intent.getStringArrayListExtra("key");
+
+
+      //  adapter = new FAAdapter(arrayList);
 
     }
 
@@ -37,28 +56,23 @@ public class FirstActivity extends AppCompatActivity {
         startActivityForResult(intent, MAIN_CODE);
 
     }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == MAIN_CODE && resultCode == RESULT_OK&& data!=null) {
+            String result=data.getStringExtra("key32");
+            adapter.addText(result);
 
-        if (requestCode == MAIN_CODE && resultCode == RESULT_OK) {
-            String str = data.getStringExtra(MainActivity.SAVED_INT_KEY);
-            textView.setText(str);
-        } else {
-            textView.setText("cancelled");
         }
     }
-
     public void onShareIntent(View v) {
-        String text = textView.getText().toString();
-        Intent shareIntant = new Intent();
+            Intent shareIntant = new Intent();
+            shareIntant.setAction(Intent.ACTION_SEND);
+            shareIntant.putExtra(Intent.EXTRA_TEXT, adapter.data.toString());
+            shareIntant.setType("text/plain");
+            if (shareIntant.resolveActivity(getPackageManager()) != null) {
+                startActivity(shareIntant);
+            }
 
-        shareIntant.setAction(Intent.ACTION_SEND);
-        shareIntant.putExtra(Intent.EXTRA_TEXT, text);
-        shareIntant.setType("text/plain");
-        if (shareIntant.resolveActivity(getPackageManager()) != null) {
-            startActivity(shareIntant);
-        }
     }
 }
