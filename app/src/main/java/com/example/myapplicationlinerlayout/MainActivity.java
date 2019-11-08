@@ -13,10 +13,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    static final String SAVED_INT_KEY = "saved_key";
     TextView result;
 
-    FAAdapter adapter;
     Button seven;
     Button eight;
     Button nine;
@@ -189,20 +187,5 @@ public class MainActivity extends AppCompatActivity {
         clear.setOnClickListener(ocl);
     }
 
-
-//    @Override
-//    public void onSaveInstanceState(Bundle outState) {
-//        super.onSaveInstanceState(outState);
-//        Log.d("ololo", "onSaveInstanceState");
-//        outState.putDouble(SAVED_INT_KEY, Double.parseDouble(result.getText().toString()));
-//    }
-//
-//    @Override
-//    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-//        super.onRestoreInstanceState(savedInstanceState);
-//        double savedDouble = savedInstanceState.getDouble(SAVED_INT_KEY);
-//        Log.d("ololo", savedDouble + " - onRestoreInstanceState");
-//        result.append(Double.toString(savedDouble));
-//    }
 
 }

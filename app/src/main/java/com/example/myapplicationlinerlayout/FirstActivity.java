@@ -13,19 +13,15 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-/**
- * */
 public class FirstActivity extends AppCompatActivity {
     FAAdapter adapter;
     RecyclerView recyclerView;
 
     TextView vh_textView;
     Button calculator_btn;
-    Button share_btn;
 
 
 
-    static final String DATA_KEY = "data";
 
 
     static final int MAIN_CODE = 42;
@@ -42,13 +38,6 @@ public class FirstActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(manager);
-
-  //      Intent intent = getIntent();
-    //    ArrayList<String> arrayList = intent.getStringArrayListExtra("key");
-
-
-      //  adapter = new FAAdapter(arrayList);
-
     }
 
     public void onCalculator(View v) {
